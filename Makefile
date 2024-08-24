@@ -5,7 +5,7 @@
 -include ./config.inc
 
 # Coq Version
-COQ_VERSION := v8.17
+COQ_VERSION := v8.20
 JSCOQ_BRANCH :=
 
 JSCOQ_VERSION := $(COQ_VERSION)
@@ -237,8 +237,8 @@ dist-npm-wacoq:
 
 .PHONY: coq coq-get coq-get-latest coq-build
 
-COQ_BRANCH = V8.17.1
-COQ_BRANCH_LATEST = v8.17
+COQ_BRANCH = V8.20+rc1
+COQ_BRANCH_LATEST = v8.20
 COQ_REPOS = https://github.com/coq/coq.git
 
 COQ_PATCHES = trampoline fold timeout $(COQ_PATCHES|$(WORD_SIZE)) $(COQ_PATCHES|$(ARCH))
