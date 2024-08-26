@@ -1,5 +1,5 @@
 diff --git a/lib/control.ml b/lib/control.ml
-index f3ce295..8dd815d 100644
+index 2480821..a693b88 100644
 --- a/lib/control.ml
 +++ b/lib/control.ml
 @@ -18,7 +18,19 @@ let enable_thread_delay = ref false
@@ -54,10 +54,10 @@ index f3ce295..8dd815d 100644
  let timeout_fun_ref = ref timeout_fun
  let set_timeout f = timeout_fun_ref := f
 diff --git a/lib/dune b/lib/dune
-index 43ee8f7..ac82c4e 100644
+index e7b1418..3ce6e87 100644
 --- a/lib/dune
 +++ b/lib/dune
-@@ -4,4 +4,8 @@
+@@ -4,6 +4,10 @@
   (public_name coq-core.lib)
   (wrapped false)
   (modules_without_implementation xml_datatype)
@@ -65,7 +65,9 @@ index 43ee8f7..ac82c4e 100644
 +  (language c)
 +  (names jscoq_extern)
 +  (flags (:include %{project_root}/config/dune.c_flags)))
-  (libraries coq-core.boot coq-core.clib coq-core.config))
+  (libraries
+   coq-core.boot coq-core.clib coq-core.config
+   (select instr.ml from
 diff --git a/lib/jscoq_extern.c b/lib/jscoq_extern.c
 new file mode 100644
 index 0000000..0cc1e5c
