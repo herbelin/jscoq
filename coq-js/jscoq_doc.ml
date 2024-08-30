@@ -68,7 +68,7 @@ let _ = CErrors.register_handler (function
 let parse ~doc ~ontop stm =
   let doc, sdoc = doc in
   if not (List.mem ontop sdoc) then raise (NoSuchState ontop);
-  let pa = Pcoq.Parsable.make (Stream.of_string stm) in
+  let pa = Pcoq.Parsable.make (Gramlib.Stream.of_string stm) in
   let entry = Pvernac.main_entry in
   Option.get @@ Stm.parse_sentence ~doc ~entry ontop pa
 
@@ -82,7 +82,7 @@ let add ~doc ~ontop ~newid stm =
   let doc, sdoc = doc in
   let verb = false                                       in
   if not (List.mem ontop sdoc) then raise (NoSuchState ontop);
-  let pa = Pcoq.Parsable.make (Stream.of_string stm)     in
+  let pa = Pcoq.Parsable.make (Gramlib.Stream.of_string stm)     in
   let entry = Pvernac.main_entry in
   let east = Option.get Stm.(parse_sentence ~doc ~entry ontop pa) in
   let ndoc, new_st, foc = Stm.add ~doc ~ontop ~newtip:newid verb east in
@@ -92,16 +92,16 @@ let add ~doc ~ontop ~newid stm =
 let query ~doc ~at ~route query =
   let doc, sdoc = doc in
   if not (List.mem at sdoc) then raise (NoSuchState at);
-  let pa = Pcoq.Parsable.make (Stream.of_string query) in
+  let pa = Pcoq.Parsable.make (Gramlib.Stream.of_string query) in
   Stm.query ~doc ~at ~route pa
 
 let load ~doc filename ~echo =
   let ndoc, sdoc = doc in
   let vernac_state = Vernac.State.
-    { doc = ndoc; sid = tip doc; proof = None; time = false } in
+    { doc = ndoc; sid = tip doc; proof = None; time = None } in
   (* loading with ~check:true to avoid some stack overflows in stm *)
   let vernac_state' =
-    Vernac.load_vernac ~echo ~check:true ~interactive:false
+    Vernac.load_vernac ~echo ~check:true
                         ~state:vernac_state filename in
   let new_sdoc = vernac_state'.sid :: sdoc in
   (vernac_state.doc, new_sdoc)
@@ -159,5 +159,5 @@ let edit ~doc edit_st =
 
 let observe ~doc sid =
   let doc, sdoc = doc in
-  let doc = Stm.observe ~doc sid in
+  let () = Stm.observe ~doc sid in
   doc, sdoc

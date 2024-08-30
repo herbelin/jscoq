@@ -251,7 +251,7 @@ let paths_to_coqpath ?(implicit=false) lib_path =
   ) lib_path
 
 let require_libs libs =
-  List.map (fun lp -> lp, None, Some Lib.Export) libs
+  List.map (fun lp -> Coqargs.{ lib = lp; prefix = None; export = Some Lib.Export }) libs
   (* Last coordinate: *)
   (*   None            : just require            *)
   (*   Some Lib.Import : import but don't export *)
