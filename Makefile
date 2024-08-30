@@ -39,7 +39,7 @@ VENDOR_PATH := $(current_dir)/_vendor+$(COQ_VERSION)$(VARIANT)
 COQSRC := $(VENDOR_PATH)/coq/
 
 # Directories where Dune builds and installs Coq
-COQBUILDDIR_REL := _vendor+$(COQ_VERSION)$(VARIANT)/coq
+COQBUILDDIR_REL := $(current_dir)/_vendor+$(COQ_VERSION)$(VARIANT)/coq
 COQBUILDDIR := $(current_dir)/_build/$(BUILD_CONTEXT)/$(COQBUILDDIR_REL)
 COQDIR := $(current_dir)/_build/install/$(BUILD_CONTEXT)
 # Dune packages to install for Coq
