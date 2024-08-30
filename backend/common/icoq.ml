@@ -20,7 +20,6 @@ type async_flags = {
   deep_edits   : bool;
 }
 
-type require_lib = (string * string option * Lib.export_flag option)
 type top_mode = Interactive | Vo
 
 type coq_opts = {
@@ -38,7 +37,7 @@ type coq_opts = {
 
 type doc_opts = {
   (* Libs to require on startup *)
-  require_libs : require_lib list;
+  require_libs : Coqargs.require_injection list;
   (* name of the top-level module *)
   top_name     : string;
   (* document mode: interactive or batch *)
@@ -81,7 +80,6 @@ let coq_init opts =
   Global.set_impredicative_set false;
   Global.set_VM false;
   Global.set_native_compiler false;
-  Flags.set_native_compiler false;
   CWarnings.set_flags default_warning_flags;
   set_options opts.opt_values;
 
@@ -108,11 +106,11 @@ let new_doc opts =
 
 let mode_of_stm ~doc sid =
   match Stm.state_of_id ~doc sid with
-  | Valid (Some { lemmas = Some _; _ }) -> Proof
+  | Valid (Some { interp = { lemmas = Some _; _ } }) -> Proof
   | _ -> General
 
 let context_of_st m = match m with
-  | Stm.Valid (Some { Vernacstate.lemmas = Some lemma ; _ } ) ->
+  | Stm.Valid (Some { interp = { Vernacstate.Interp.lemmas = Some lemma ; _ } }) ->
     Vernacstate.LemmaStack.with_top lemma
       ~f:(fun pstate -> Declare.Proof.get_current_context pstate)
   | _ ->
@@ -129,7 +127,7 @@ let compile_vo ~doc vo_out_fn =
   let dirp = Lib.library_dp () in
   (* freeze and un-freeze to to allow "snapshot" compilation *)
   (*  (normally, save_library_to closes the lib)             *)
-  let frz = Vernacstate.freeze_interp_state ~marshallable:false in
+  let frz = Vernacstate.Interp.freeze_interp_state () in
   Library.save_library_to Library.ProofsTodoNone ~output_native_objects:false dirp vo_out_fn;
   Vernacstate.unfreeze_interp_state frz;
   vo_out_fn

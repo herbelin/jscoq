@@ -19,7 +19,6 @@ type async_flags = {
   deep_edits   : bool;
 }
 
-type require_lib = (string * string option * Lib.export_flag option)
 type top_mode = Interactive | Vo
 
 type coq_opts = {
@@ -37,7 +36,7 @@ type coq_opts = {
 
 type doc_opts = {
   (* Libs to require on startup *)
-  require_libs : require_lib list;
+  require_libs : Coqargs.require_injection list;
   (* name of the top-level module *)
   top_name     : string;
   (* document mode: interactive or batch *)

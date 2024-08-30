@@ -98,10 +98,10 @@ let query ~doc ~at ~route query =
 let load ~doc filename ~echo =
   let ndoc, sdoc = doc in
   let vernac_state = Vernac.State.
-    { doc = ndoc; sid = tip doc; proof = None; time = false } in
+    { doc = ndoc; sid = tip doc; proof = None; time = None } in
   (* loading with ~check:true to avoid some stack overflows in stm *)
   let vernac_state' =
-    Vernac.load_vernac ~echo ~check:true ~interactive:false
+    Vernac.load_vernac ~echo ~check:true
                         ~state:vernac_state filename in
   let new_sdoc = vernac_state'.sid :: sdoc in
   (vernac_state.doc, new_sdoc)
@@ -159,5 +159,5 @@ let edit ~doc edit_st =
 
 let observe ~doc sid =
   let doc, sdoc = doc in
-  let doc = Stm.observe ~doc sid in
+  let () = Stm.observe ~doc sid in
   doc, sdoc
