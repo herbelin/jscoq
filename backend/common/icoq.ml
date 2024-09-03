@@ -129,7 +129,7 @@ let compile_vo ~doc vo_out_fn =
   (*  (normally, save_library_to closes the lib)             *)
   let frz = Vernacstate.Interp.freeze_interp_state () in
   Library.save_library_to Library.ProofsTodoNone ~output_native_objects:false dirp vo_out_fn;
-  Vernacstate.unfreeze_interp_state frz;
+  Vernacstate.Interp.unfreeze_interp_state frz;
   vo_out_fn
 
 (** [set_debug t] enables/disables debug mode  *)

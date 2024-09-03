@@ -62,5 +62,5 @@ val is_bytecode : string -> bool
 
 (** This shouldn't be needed...  *)
 val paths_to_coqpath : ?implicit:bool -> (string list * string list) list -> Loadpath.vo_path list
-val require_libs : string list -> (string * string option * Lib.export_flag option) list
+val require_libs : string list -> Coqargs.require_injection list
 val module_name_of_qualid : Libnames.qualid -> string list

@@ -52,7 +52,7 @@ let is_bytecode file =
   chk "cma" || chk "cmo" || chk "cma.js" || chk "cmo.js"
 
 let require_libs libs =
-  List.map (fun lp -> lp, None, Some Lib.Export) libs
+  List.map (fun lp -> Coqargs.{ lib = lp; prefix = None; export = Some Lib.Export }) libs
   (* Last coordinate: *)
   (*   None            : just require            *)
   (*   Some Lib.Import : import but don't export *)

@@ -134,7 +134,7 @@ let setup_top () =
     ; load_module = load_cma
     (* We ignore all the other operations for now. *)
     ; add_dir  = (fun _ -> ())
-    ; ml_loop  = (fun _ -> ());
+    ; ml_loop  = (fun ?init_file:_ _ -> ());
     };
 
   coq_vm_trap ()
