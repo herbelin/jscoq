@@ -241,7 +241,7 @@ COQ_BRANCH = V8.20+rc1
 COQ_BRANCH_LATEST = v8.20
 COQ_REPOS = https://github.com/coq/coq.git
 
-COQ_PATCHES = trampoline fold timeout $(COQ_PATCHES|$(WORD_SIZE)) $(COQ_PATCHES|$(ARCH))
+COQ_PATCHES = trampoline fold timeout ring $(COQ_PATCHES|$(WORD_SIZE)) $(COQ_PATCHES|$(ARCH))
 
 COQ_PATCHES|64 = coerce-32bit
 

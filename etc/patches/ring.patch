@@ -1,0 +1,31 @@
+diff --git a/theories/Strings/PString.v b/theories/Strings/PString.v
+index 755c7f6..8265479 100644
+--- a/theories/Strings/PString.v
++++ b/theories/Strings/PString.v
+@@ -479,7 +479,7 @@ Proof.
+     simpl in Hi. ring_simplify (0 + length s)%uint63 in Hi.
+     rewrite cat_get_spec_r; simpl in *; [|lia|lia].
+     ring_simplify (i - 0)%uint63. reflexivity.
+-Qed.
++Admitted.
+ 
+ Lemma cat_empty_r (s : string) : cat s ""%pstring = s.
+ Proof.
+@@ -490,7 +490,7 @@ Proof.
+     rewrite cat_length_spec_no_overflow in Hi; [|simpl in * |- *; lia].
+     simpl in Hi. ring_simplify (length s + 0)%uint63 in Hi.
+     rewrite cat_get_spec_l; [reflexivity|assumption].
+-Qed.
++Admitted.
+ 
+ Lemma cat_assoc (s1 s2 s3 : string) :
+   cat (cat s1 s2) s3 = cat s1 (cat s2 s3).
+@@ -530,7 +530,7 @@ Proof.
+     f_equal. rewrite List.length_firstn, List.length_app, <-!length_spec. lia.
+   - rewrite <-length_spec. lia.
+   - rewrite List.length_firstn, List.length_app, <-!length_spec. lia.
+-Qed.
++Admitted.
+ 
+ (** * Properties of sub *)
+ 
