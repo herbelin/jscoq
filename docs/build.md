@@ -27,7 +27,7 @@ To build jsCoq you will need a modern Unix system (Linux or macOS), and:
 
  1. Clone the jsCoq repo.
 ```sh
-git clone --recursive git@github.com:ejgallego/jscoq.git  # (this repo)
+git clone --recursive git@github.com:jscoq/jscoq.git  # (this repo)
 cd jscoq
 ```
 
