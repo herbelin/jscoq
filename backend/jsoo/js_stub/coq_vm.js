@@ -23,11 +23,11 @@ function coq_vm_trap() {    // will cause future calls to vm code to fault
   vm_ll.log = vm_ll.trap = true;  // (called after initialization)
 }
 
-// Provides: accumulate_code
+// Provides: coq_accumulate
 // Requires: vm_ll
-function accumulate_code() {
+function coq_accumulate() {
   // EG: Where the hell is that called from
-  vm_ll('accumulate_code', arguments);
+  vm_ll('coq_accumulate', arguments);
   return [];
 }
 
