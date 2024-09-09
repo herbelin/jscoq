@@ -60,7 +60,7 @@
             },
             "plugins": {
                 "prefix": "Coq",
-                "dirpaths": ["ltac2"]
+                "dirpaths": ["ltac2", "ltac2_ltac1"]
             }
         }
     }
