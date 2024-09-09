@@ -90,7 +90,8 @@ let coq_init opts =
   (**************************************************************************)
   (* Start the STM!!                                                        *)
   (**************************************************************************)
-  Stm.init_core ()
+  Stm.init_core ();
+  Stm.init_process Stm.AsyncOpts.default_opts
 
 let new_doc opts =
   let doc_type = match opts.mode with
